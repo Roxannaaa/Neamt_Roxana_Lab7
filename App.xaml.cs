@@ -1,11 +1,31 @@
-﻿namespace Neamt_Roxana_Lab7;
+﻿using System;
+using System.IO;
+using Neamt_Roxana_Lab7.Data;
+using Neamt_Roxana_Lab7.Models;
+
+namespace Neamt_Roxana_Lab7;
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
+    static ShoppingListDatabase database;
+    public static ShoppingListDatabase Database
+    {
+        get
+        {
+            if (database == null)
+            {
+                database = new
+               ShoppingListDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.
+               LocalApplicationData), "ShoppingList.db3"));
+            }
+            return database;
+        }
+    }
 
-		MainPage = new AppShell();
-	}
+    public App()
+    {
+        InitializeComponent();
+
+        MainPage = new AppShell();
+    }
 }
